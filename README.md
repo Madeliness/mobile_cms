@@ -1,7 +1,4 @@
 # mobile_cms
-<<<<<<< HEAD
-a vue project like mobile cms
-=======
 
 > A Vue.js project
 
@@ -37,4 +34,3 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
     "lint": "eslint --ext .js,.vue src test/e2e/specs", // 检查语法
     "build": "node build/build.js" /**** 通过node编译****/
   },
->>>>>>> a vue project at mobile
