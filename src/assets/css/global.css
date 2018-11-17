@@ -1,0 +1,19 @@
+body,
+ul,
+li,
+p {
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style: none;
+}
+.tmpl {
+    margin-bottom: 55px;
+}
+a {
+    text-decoration: none;
+}
+.news-content img {
+  width: 100%;
+}
