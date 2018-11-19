@@ -11,10 +11,10 @@
                    </div>
                </li>
                <li class="txt-comment">
-                   <textarea></textarea>
+                   <textarea v-model="newComment"></textarea>
                </li>
                <li>
-                   <mt-button size="large" type="primary">发表评论</mt-button>
+                   <mt-button size="large" type="primary" @click="sendMsg">发表评论</mt-button>
                </li>
                <li class="photo-comment">
                    <div>
@@ -24,8 +24,11 @@
                 </li>
            </ul>
            <ul class="comment-list">
-               <li></li>
+               <li v-for="(msg, i) in msgs" :key="i">
+                {{msg.user_name}}：{{msg.content}} <span>{{msg.add_time | relativeTime}}</span>
+               </li>
            </ul>
+           <mt-button type="danger" size="large" plain @click="loadMore(page)">加载更多</mt-button>
         </div> 
     </div>
 </template>
@@ -35,32 +38,48 @@ export default {
     data() {
         return {
             info: {},
-            imgs: []
+            msgs: [],
+            page: 1,
+            newComment: ''
         }
     },
+    props: ['cid'], // 评论所需id
     created() {
-        // 获取路由查询字符串参数id
-        let id = this.$route.query.id
-        // 获取图文详情
-        this.$axios.get(`getimageInfo/${id}`).then(res => {
-            this.info = res.data.message[0]
-        }).catch(err => {
-            console.log('图文详情获取失败', err)
-        })
-        // 获取缩略图
-        this.$axios.get('getthumimages/' + id).then(res => {
-            this.imgs = res.data.message
-            this.imgs.forEach(img => {
-              img.msrc = img.src
-              img.width = 600
-              img.height = 400
-            })
-        }).catch(err => {
-            console.log('图文缩略图获取失败', err)
-        })
+        // 判断是否有页码，默认页码为1
+        this.page = this.$route.query.page || '1'
+        this.loadMore()
     },
     methods: {
-        handleClose() {}
+        handleClose() {},
+        // 该函数传参，表示页面点击按钮，追加数据；否则就是赋值，一般是针对第一次或者刷新第n页数据的时候
+        loadMore(page) {
+            this.$axios.get(`getcomments/${this.cid}?pageindex=${this.page}`).then(res => {
+                if (res.data.message.length === 0) {
+                    this.$toast('没有数据了！')
+                }
+                if (page) {
+                    this.msgs = this.msgs.concat(res.data.message)
+                } else {
+                    this.msgs = res.data.message
+                }
+                this.page ++
+            }).catch(err => {
+                console.log('评论获取失败', err)
+            })
+        },
+        sendMsg() {
+            // this.newComment
+            if (this.newComment.trim() === '') {
+                return this.$toast('评论信息不能为空!')
+            }
+            this.$axios.post(`postcomment/${this.cid}`, `content=${this.newComment}`).then(res => {
+                this.newComment = ''
+                this.page = 1
+                this.loadMore()
+            }).catch(err => {
+                console.log('发表评论失败！', err)
+            })
+        }
     }
 }
 </script>

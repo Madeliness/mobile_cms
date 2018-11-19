@@ -20,7 +20,7 @@
             <p v-html="info.content"></p>
         </div>
         <!--评论组件-->
-        <comment></comment>
+        <comment :cid="id"></comment>
     </div>
 </template>
 <script>
@@ -29,20 +29,22 @@ export default {
     data() {
         return {
             info: {},
-            imgs: []
+            imgs: [],
+            id: ''
         }
     },
     created() {
         // 获取路由查询字符串参数id
-        let id = this.$route.query.id
+        this.id = this.$route.query.id
+        // this.id = id
         // 获取图文详情
-        this.$axios.get(`getimageInfo/${id}`).then(res => {
+        this.$axios.get(`getimageInfo/${this.id}`).then(res => {
             this.info = res.data.message[0]
         }).catch(err => {
             console.log('图文详情获取失败', err)
         })
         // 获取缩略图
-        this.$axios.get('getthumimages/' + id).then(res => {
+        this.$axios.get('getthumimages/' + this.id).then(res => {
             this.imgs = res.data.message
             this.imgs.forEach(img => {
               img.msrc = img.src

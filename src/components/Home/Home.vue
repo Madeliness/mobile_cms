@@ -37,7 +37,7 @@ export default {
                     }
                 },
                 {
-                    className: 'cms-goods',
+                    className: 'cms-pic',
                     title: '图文分享',
                     router: {
                         name: 'photo.list',
@@ -50,7 +50,10 @@ export default {
                     className: 'cms-goods',
                     title: '商品展示',
                     router: {
-                        name: 'news.list'
+                        name: 'goods.list',
+                        query: {
+                            id: 1
+                        }
                     }
                 },
                 {

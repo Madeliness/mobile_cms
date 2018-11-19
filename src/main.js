@@ -21,9 +21,14 @@ import MyLi from '@/components/Common/MyLi'
 import NavBar from '@/components/Common/NavBar'
 import Comment from '@/components/Common/Comment'
 
+// 时间换算中文显示
+Moment.locale('zh-cn')
 // {{'xxx'|converTime('yyyy-mm-dd')}}
 Vue.filter('converTime', function (data, formatStr) {
   return Moment(data).format(formatStr)
+})
+Vue.filter('relativeTime', function (previousTime) {
+  return Moment(previousTime).fromNow()
 })
 
 // 注册全局组件
@@ -31,6 +36,7 @@ Vue.component(MyUl.name, MyUl)
 Vue.component(MyLi.name, MyLi)
 Vue.component(NavBar.name, NavBar)
 Vue.component(Comment.name, Comment)
+
 // 配置公共url
 Axios.defaults.baseURL = 'http://www.sinya.online/api/'
 Vue.prototype.$axios = Axios
@@ -39,6 +45,20 @@ Vue.prototype.$axios = Axios
 Vue.use(MintUI)
 // 内部运行
 Vue.use(VuePreview)
+
+// 配置请求拦截器，显示loading图标
+Axios.interceptors.request.use(function (config) {
+  MintUI.Indicator.open({
+    text: '玩命加载中...'
+  })
+  return config
+})
+// 配置相应拦截器，关闭loading
+Axios.interceptors.response.use(function (response) {
+  // response.config 类似上面config
+  MintUI.Indicator.close()
+  return response
+})
 
 Vue.config.productionTip = false
 
