@@ -34,3 +34,8 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
     "lint": "eslint --ext .js,.vue src test/e2e/specs", // 检查语法
     "build": "node build/build.js" /**** 通过node编译****/
   },
+#### 父子组件内样式的心得
+* 父样式对子组件无效
+* 子组件只对自己有效
+* 全局样式对所有的都有效
+*———建议：组件负责自己的样式，全局样式用的地方都可以控制

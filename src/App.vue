@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header title="信息管理系统"></mt-header>
-    <router-view></router-view>
+    <router-view class="tmpl"></router-view>
     <mt-tabbar v-model="selected" fixed>
       <mt-tab-item id="home">
         <img @click="changeHash" slot="icon" src="./assets/images/0001.jpg"> 首页
@@ -36,7 +36,4 @@ export default {
 }
 </script>
 <style>
-body {
-  margin: 0;
-}
 </style>

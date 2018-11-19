@@ -1,5 +1,5 @@
 <template>
-    <div class="tmpl">
+    <div>
         <nav-bar title="图文列表"></nav-bar>
         <div class="photo-header">
             <ul>

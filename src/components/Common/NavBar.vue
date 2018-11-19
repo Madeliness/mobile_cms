@@ -20,6 +20,8 @@ export default {
 <style scoped>
 h1 {
     display: inline-block;
+    font-size: 1.5em;
+    margin: 10px auto;
 }
 .cms-s-header {
     background: #f7f7f7;

@@ -1,21 +1,26 @@
 <template>
-    <div class="tmpl">
-        <nav-bar title="新闻详情"></nav-bar>
-        <div class="news-title">
+    <div>
+        <nav-bar title="图文详情"></nav-bar>
+        <div class="photo-title">
             <p>
-                {{newsDetail.title}}
+                {{info.title}}
             </p>
-            <div>
-                <span>
-                    {{newsDetail.click}}次点击
-                </span>
-                <span></span>
-                <span>
-                    添加时间：{{newsDetail.add_time | converTime('YYYY-MM-DD')}}
-                </span>
-            </div>
+            <span>
+               发起日期: {{info.add_time | converTime('YYYY-MM-DD')}}
+            </span>
+            <span>
+                浏览:{{info.click}}
+            </span>
+            <span>
+                分类：民生经济
+            </span>
         </div>
-        <div class="news-content" v-html="newsDetail.content"></div>
+        <vue-preview :slides="imgs" @close="handleClose"></vue-preview>
+        <div class="photo-desc">
+            <p v-html="info.content"></p>
+        </div>
+        <!--评论组件-->
+        <comment></comment>
     </div>
 </template>
 <script>
@@ -23,34 +28,55 @@ export default {
     name: 'news-detail',
     data() {
         return {
-            newsDetail: {}
+            info: {},
+            imgs: []
         }
     },
     created() {
         // 获取路由查询字符串参数id
         let id = this.$route.query.id
-        this.$axios.get(`getnew/${id}`).then(res => {
-            this.newsDetail = res.data.message[0]
+        // 获取图文详情
+        this.$axios.get(`getimageInfo/${id}`).then(res => {
+            this.info = res.data.message[0]
         }).catch(err => {
-            console.log(err)
+            console.log('图文详情获取失败', err)
         })
+        // 获取缩略图
+        this.$axios.get('getthumimages/' + id).then(res => {
+            this.imgs = res.data.message
+            this.imgs.forEach(img => {
+              img.msrc = img.src
+              img.width = 600
+              img.height = 400
+            })
+        }).catch(err => {
+            console.log('图文缩略图获取失败', err)
+        })
+    },
+    methods: {
+        handleClose() {}
     }
 }
 </script>
 <style scoped>
-.news-title {
-    margin-top: 5px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2); 
+.photo-title {
+    overflow: hidden;
 }
-.news-title p {
-    color: #0a87f8;
+.photo-title p {
+    color: #13c2f7;
     font-size: 20px;
     font-weight: bold;
 }
-.news-title span {
-    margin-right: 30px;
+.photo-title span {
+    margin-right: 20px;
 }
-.news-content {
-    padding:  10px 5px;
+.photo-desc, .photo-title {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    padding-left: 5px;
+}
+.photo-desc p {
+    font-size: 18px;
 }
 </style>

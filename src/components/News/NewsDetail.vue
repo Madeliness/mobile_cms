@@ -1,5 +1,5 @@
 <template>
-    <div class="tmpl">
+    <div>
         <nav-bar title="新闻详情"></nav-bar>
         <div class="news-title">
             <p>
