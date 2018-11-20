@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav-bar title="新闻详情"></nav-bar>
+        <nav-bar :title="title"></nav-bar>
         <div class="news-title">
             <p>
                 {{newsDetail.title}}
@@ -23,7 +23,8 @@ export default {
     name: 'news-detail',
     data() {
         return {
-            newsDetail: {}
+            newsDetail: {},
+            title: ''
         }
     },
     created() {
@@ -33,6 +34,18 @@ export default {
             this.newsDetail = res.data.message[0]
         }).catch(err => {
             console.log(err)
+        })
+    },
+    // 路由确认前，组件渲染前的守卫函数
+    beforeRouteEnter(to, from, next) {
+        console.log('to', to)
+        console.log('from', from)
+        // ①判断from 的name为空，说明是粘贴地址栏
+        // ①.① 继续判断，根据to来设置title
+        // ②如果from 是新闻列表
+        // ③商品详情
+        next(vm => {
+            // 通过vm访问组件实例
         })
     }
 }

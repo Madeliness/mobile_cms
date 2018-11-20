@@ -11,6 +11,7 @@ import NewsDetail from '@/components/News/NewsDetail'
 import PhotoList from '@/components/Photo/PhotoList'
 import PhotoDetail from '@/components/Photo/PhotoDetail'
 import GoodsList from '@/components/Goods/GoodsList'
+import GoodsDetail from '@/components/Goods/GoodsDetail'
 
 Vue.use(Router)
 
@@ -21,8 +22,7 @@ export default new Router({
     redirect: {
       name: 'home'
     }
-  },
-  {
+  }, {
     path: '/home',
     name: 'home',
     component: Home
@@ -38,10 +38,8 @@ export default new Router({
     path: '/member',
     name: 'member',
     component: Member
-  },
-    // 导航列表
-  {
-    path: '/news/list',
+  }, {
+    path: '/news/list', // 导航列表
     name: 'news.list',
     component: NewsList
   }, {
@@ -49,10 +47,8 @@ export default new Router({
     name: 'news.detail',
     path: '/news/detail',
     component: NewsDetail
-  },
-    // 图文列表
-  {
-    name: 'photo.list',
+  }, {
+    name: 'photo.list', // 图文列表
     path: '/photo/list/:categoryId',
     component: PhotoList
   }, {
@@ -63,6 +59,14 @@ export default new Router({
     name: 'goods.list',
     path: '/goods/list',
     component: GoodsList
+  }, {
+    name: 'goods.detail',
+    path: '/goods/detail/:id',
+    component: GoodsDetail
+  }, {
+    name: 'photo.info',
+    path: '/goods/photo/info',
+    component: NewsDetail
   }
   ]
 })

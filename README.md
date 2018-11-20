@@ -39,3 +39,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 * 子组件只对自己有效
 * 全局样式对所有的都有效
 *———建议：组件负责自己的样式，全局样式用的地方都可以控制
+#抽取组件的条件
+1.样式是否一致
+2.动态数据接口的Url是否一致（传递url）
+3.对象结构是否一致

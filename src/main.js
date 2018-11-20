@@ -20,6 +20,7 @@ import MyUl from '@/components/Common/MyUl'
 import MyLi from '@/components/Common/MyLi'
 import NavBar from '@/components/Common/NavBar'
 import Comment from '@/components/Common/Comment'
+import MySwipe from '@/components/Common/MySwipe'
 
 // 时间换算中文显示
 Moment.locale('zh-cn')
@@ -30,12 +31,16 @@ Vue.filter('converTime', function (data, formatStr) {
 Vue.filter('relativeTime', function (previousTime) {
   return Moment(previousTime).fromNow()
 })
-
+// 处理字符串过长的过滤器
+Vue.filter('convertStr', function (str, count) {
+  return str.substring(0, count) + '...'
+})
 // 注册全局组件
 Vue.component(MyUl.name, MyUl)
 Vue.component(MyLi.name, MyLi)
 Vue.component(NavBar.name, NavBar)
 Vue.component(Comment.name, Comment)
+Vue.component(MySwipe.name, MySwipe)
 
 // 配置公共url
 Axios.defaults.baseURL = 'http://www.sinya.online/api/'
