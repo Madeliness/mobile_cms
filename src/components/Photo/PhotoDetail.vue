@@ -15,7 +15,7 @@
                 分类：民生经济
             </span>
         </div>
-        <vue-preview :slides="imgs" @close="handleClose"></vue-preview>
+        <vue-preview :slides="imgs" @close="handleClose(event)" ref="preview" class="preview"></vue-preview>
         <div class="photo-desc">
             <p v-html="info.content"></p>
         </div>
@@ -45,18 +45,22 @@ export default {
         })
         // 获取缩略图
         this.$axios.get('getthumimages/' + this.id).then(res => {
-            this.imgs = res.data.message
-            this.imgs.forEach(img => {
+            res.data.message.forEach(img => {
               img.msrc = img.src
+              img.art = "ioctre2";
+              img.title = "缩略图";
               img.width = 600
               img.height = 400
             })
+            this.imgs = res.data.message
         }).catch(err => {
             console.log('图文缩略图获取失败', err)
         })
     },
     methods: {
-        handleClose() {}
+        handleClose(e) {
+            console.log(e)
+        }
     }
 }
 </script>

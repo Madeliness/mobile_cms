@@ -1,0 +1,14 @@
+{
+    "getshopcarlist": [
+        {
+            "id": 1,
+            "myid": "87",
+            "title": "华为荣耀"
+        }, 
+        {
+            "id": 2,
+            "myid": "88",
+            "title": "苹果"
+        }
+    ]
+}

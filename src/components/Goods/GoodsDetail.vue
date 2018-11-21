@@ -3,7 +3,7 @@
         <nav-bar title="商品详情"></nav-bar>
         <div class="outer-swiper">
             <div class="swiper">
-                <my-swipe url="getthumimages/87"></my-swipe>
+                <my-swipe :url="`getthumimages/${this.imgId}`"></my-swipe>
             </div>
         </div>
         <div class="product-desc">
@@ -30,8 +30,8 @@
                     <span @click="add">+</span>
                 </li>
                 <li>
-                    <mt-button type="primary">立即购买</mt-button>
-                    <mt-button type="danger" @click="insertBall">加入购物车</mt-button>
+                    <mt-button type="primary" size="small">立即购买</mt-button>
+                    <mt-button type="danger" @click="insertBall"  size="small">加入购物车</mt-button>
                 </li>
             </ul>
         </div>
@@ -52,7 +52,7 @@
                     <mt-button type="primary" size="large" plain @click="showPhotoInfo">图文介绍</mt-button>
                 </li>
                 <li>
-                    <mt-button type="danger" size="large" plain>商品评论</mt-button>
+                    <mt-button type="danger" size="large" plain @click="goodsComment">商品评论</mt-button>
                 </li>
             </ul>
         </div>
@@ -60,6 +60,7 @@
 </template>
 <script>
 import EventBus from '@/EventBus'
+import GoodsTools from '@/GoodsTools'
 export default {
     name: 'goods-detail',
     data() {
@@ -89,6 +90,11 @@ export default {
             this.isExist = false
             // 通知App组件添加小球数量
             EventBus.$emit('addShopcart', this.pickNum)
+            // 添加到本地存储
+            GoodsTools.add({
+                id: this.info.id,
+                num: this.pickNum
+            })
         },
         add() {
             if(this.info.stock_quantity <= this.pickNum) return
@@ -103,6 +109,16 @@ export default {
             // 编程导航
             this.$router.push({
                 name: 'photo.info',
+                query: {
+                    id: this.imgId
+                }
+            })
+        },
+        // 显示商品评论
+        goodsComment() {
+            // 编程导航 goods.comment 使用评论子组件
+            this.$router.push({
+                name: 'goods.comment',
                 query: {
                     id: this.imgId
                 }
@@ -152,7 +168,6 @@ export default {
     border-radius: 15px;
     overflow: hidden;
 }
-.outer-swiper {}
 .outer-swiper, .product-desc, .product-props, .product-info {
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.2);

@@ -1,7 +1,9 @@
 <template>
   <div>
     <mt-header title="信息管理系统"></mt-header>
-    <router-view class="tmpl"></router-view>
+    <transition name="rv" mode="out-in">
+      <router-view class="tmpl"></router-view>
+    </transition>
     <mt-tabbar v-model="selected" fixed>
       <mt-tab-item id="home">
         <img @click="changeHash" slot="icon" src="./assets/images/0001.jpg"> 首页
@@ -22,14 +24,17 @@
 </template>
 <script>
 import EventBus from './EventBus.js'
+import GoodsTools from './GoodsTools.js'
 export default {
   data () {
     return {
       selected: '',
-      num: 0
+      num: 1
     }
   },
   created() {
+    // 初始化小球的数量
+    this.num = GoodsTools.getTotalCount()
     EventBus.$on('addShopcart', data => {
       this.num += data
     })
@@ -44,5 +49,11 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
+.rv-enter-active, .rv-leave-active {
+  transition: opacity 0.5s
+}
+.rv-enter, .rv-leave-to {
+  opacity: 0;
+}
 </style>

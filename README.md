@@ -43,3 +43,8 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 1.样式是否一致
 2.动态数据接口的Url是否一致（传递url）
 3.对象结构是否一致
+#补充db的操作
+1.npm i -g json-server
+2.创建db.json文件
+3.在此处打开命令行窗口 json-server --watch ./db.json
+4.修改shopcart.vue中的请求url

@@ -4,9 +4,9 @@
            <ul>
                <li class="photo-comment">
                    <div>
-                       <span>1</span>
+                       <span>提交评论</span>
                        <span>
-                           <a>1</a>
+                           <a>返回</a>
                        </span>
                    </div>
                </li>
@@ -18,14 +18,14 @@
                </li>
                <li class="photo-comment">
                    <div>
-                       <span>2</span>
+                       <span>评论列表</span>
                        <span>2</span>
                    </div>
                 </li>
            </ul>
            <ul class="comment-list">
                <li v-for="(msg, i) in msgs" :key="i">
-                {{msg.user_name}}：{{msg.content}} <span>{{msg.add_time | relativeTime}}</span>
+                <span>{{msg.user_name}}：{{msg.content}}</span> <span>{{msg.add_time | relativeTime}}</span>
                </li>
            </ul>
            <mt-button type="danger" size="large" plain @click="loadMore(page)">加载更多</mt-button>
@@ -99,6 +99,16 @@ export default {
     width: 100%;
     margin-bottom: 5px;
 }
+.comment-list {
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    float: left;
+}
+.comment-list span:last-child {
+    float: right;
+}
+.com
 .txt-list li {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     margin-bottom: 5px;
