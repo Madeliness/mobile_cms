@@ -4,9 +4,21 @@ li,
 p,
 a,
 table,
-figure {
+figure,
+div {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+ul,
+menu,
+dir {
+  display: block;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 0;
 }
 li {
     list-style: none;
@@ -15,6 +27,7 @@ li {
     margin-bottom: 60px;
     width: 100%;
     box-sizing: border-box;
+    overflow: hidden;
 }
 a {
     text-decoration: none;
@@ -39,15 +52,12 @@ table {
   vertical-align: middle;
 }
 .my-gallery figure {
-    
     width: calc((100% - 12px) / 3);
     float: left;
-    box-shadow: 0 0 10px #ccc;
+    box-shadow: 0 0 2px #ccc;
     -webkit-margin-before: 0;
     -webkit-margin-after: 0;
     -webkit-margin-start: 0;
     -webkit-margin-end: 0;
     margin: 0 2px 2px;
-
-
 }

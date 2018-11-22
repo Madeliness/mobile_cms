@@ -11,11 +11,8 @@
             <span>
                 浏览:{{info.click}}
             </span>
-            <span>
-                分类：民生经济
-            </span>
         </div>
-        <vue-preview :slides="imgs" @close="handleClose(event)" ref="preview" class="preview"></vue-preview>
+        <vue-preview :slides="imgs" @close="handleClose(event)" ref="preview" class="preview-img"></vue-preview>
         <div class="photo-desc">
             <p v-html="info.content"></p>
         </div>
@@ -25,7 +22,7 @@
 </template>
 <script>
 export default {
-    name: 'news-detail',
+    name: 'phone-detail',
     data() {
         return {
             info: {},

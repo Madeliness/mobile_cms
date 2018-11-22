@@ -22,7 +22,8 @@ export default {
     name: 'news-detail',
     data() {
         return {
-            newsDetail: {}
+            newsDetail: {},
+            title: ''
         }
     },
     created() {

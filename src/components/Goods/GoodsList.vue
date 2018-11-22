@@ -34,8 +34,6 @@ export default {
     name: 'goods-list',
     data() {
         return {
-            topStatus: '',
-            // ...
             goodsList: [],
             page: 1,
             isAllLoaded: false // 全部数据是否加载完毕
@@ -49,10 +47,8 @@ export default {
         loadByPage() {
             this.$axios.get(`getgoods?pageindex=${this.page}`).then(res => {
                 if (parseInt(this.page) === 1) {
-                    console.log('loadByPage2', this.page)
                     this.goodsList = res.data.message
                     this.page ++
-                    console.log('loadByPage2·', this.page, typeof this.page)
                 }
             }).catch(err => {
                 console.log('商品列表获取失败', err)
@@ -70,8 +66,9 @@ export default {
                 // 通知元素重新定位
                 this.$refs.loadmore.onBottomLoaded()
                 this.page ++
+            }).catch(err => {
+                console.log('商品列表获取失败', err)
             })
-            console.log('concatByPage', this.page, typeof this.page)
         },
         // auto-fill 自动帮助发请求填充满父元素
         // 子元素，向上移动，移动到底边接近于父容器（可视区域+卷入的高度scollTop=数据总体长度 + 1 = loadmore）底边平行的时候，再上拉才进入检测
