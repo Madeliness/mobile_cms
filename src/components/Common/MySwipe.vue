@@ -1,5 +1,5 @@
 <template>
-    <mt-swipe :auto="0">
+    <mt-swipe :auto="5000">
             <mt-swipe-item v-for="(v, i) in imgs" :key="i">
                 <img :src="v.img || v.src" />
             </mt-swipe-item>
