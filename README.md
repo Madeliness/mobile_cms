@@ -73,8 +73,14 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
   *transition 给元素或组件添加 过渡效果(js+css)
 #特殊函数
   *this.$nextTick(fn) 在vue生成dom以后的dom操作行为
+  
     eg: 当前this.isExist= true,立刻操作这个元素不行，而需要在$nextTick中，因为当前代码执行的时候元素还未存在
+    
   *this.$set(obj, key, value) 手动通知vue数据响应式
+  
   *this.refs.xxx => ref = 'xxx'
+  
     元素获取的就是元素对象
+    
     组件获取的就是组件对象  xxx.$el 获取dom对象
+    
