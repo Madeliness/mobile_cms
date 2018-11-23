@@ -39,9 +39,6 @@ export default {
 }
 </script>
 <style scoped>
-.tmpl {
-    margin-bottom: 55px;
-}
 .demo a {
     display: block;
     width: calc(100% - 30px);
@@ -80,9 +77,4 @@ export default {
 .demo a p:nth-child(2) {
     float: right;
 }
-/* .line {
-    margin-left: 16px;
-    transform: scaleY(0.5);
-    border-bottom: 1px solid #c8c7cc;
-} */
 </style>

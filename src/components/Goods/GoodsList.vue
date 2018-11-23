@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div :style="{ height: boxHeight }">
         <nav-bar title="商品展示"></nav-bar>
-        <mt-loadmore :auto-fill="false" :bottom-method="loadBottom" :bottom-all-loaded="isAllLoaded" ref="loadmore">
+        <mt-loadmore :auto-fill="false" :bottom-method="loadBottom" :bottom-all-loaded="isAllLoaded" ref="loadmore" style="margin-bottom: 60px;">
             <ul>
                 <li v-for="goods in goodsList" :key="goods.id">
                     <router-link :to="{name: 'goods.detail', params: {id: goods.id}}">
@@ -32,16 +32,26 @@
 // <img :src="ImgSrc"/>
 export default {
     name: 'goods-list',
+    props: ['apprefs'],
     data() {
         return {
             goodsList: [],
             page: 1,
-            isAllLoaded: false // 全部数据是否加载完毕
+            isAllLoaded: false, // 全部数据是否加载完毕
+            boxHeight: 0
         }
     },
     created() {
         this.page = this.$route.query.id
         this.loadByPage()
+    },
+    mounted() {
+        // 装载数据完毕 接收addrefs.appheaer
+        // 公式：设备高度-头-尾 = 中间的高度 (loadmore)
+        // tihs.height = document.body.clientHeight
+        let Header_h = this.apprefs.appHeader.$el.offsetHeight
+        let Footer_h = this.apprefs.appFooter.$el.offsetHeight
+        this.boxHeight = document.body.clientHeight - Header_h - Footer_h - 10
     },
     methods: {
         loadByPage() {
@@ -98,7 +108,7 @@ li > a:not(.mui-btn) {
     display: block;
 }
 li > a:not(.mui-btn) img {
-    width: 150px;
+    width: 148px;
     
 }
 .sell > span {
@@ -125,6 +135,6 @@ li > a:not(.mui-btn) img {
     background-color: rgba(0, 0, 0, 0.2);
 }
 img {
-    height: 150px;
+    height: 148px;
 }
 </style>
