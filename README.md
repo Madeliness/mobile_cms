@@ -28,13 +28,20 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js", // 启动webpack工具，加载的是webpack.dev.conf.js
+    
     "start": "npm run dev",
+    
     "e2e": "node test/e2e/runner.js", // 端对端的最终真实测试
+    
     "test": "npm run e2e",
+    
     "lint": "eslint --ext .js,.vue src test/e2e/specs", // 检查语法
+    
     "build": "node build/build.js" /**** 通过node编译****/
+    
   },
 #### 父子组件内样式的心得
+
 * 父样式对子组件无效
 
 * 子组件只对自己有效
