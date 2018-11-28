@@ -27,6 +27,7 @@ npm test
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
   "scripts": {
+  
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js", // 启动webpack工具，加载的是webpack.dev.conf.js
     
     "start": "npm run dev",
