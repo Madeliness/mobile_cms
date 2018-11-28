@@ -25,7 +25,9 @@
            </ul>
            <ul class="comment-list">
                <li v-for="(msg, i) in msgs" :key="i">
-                <span>{{msg.user_name}}：{{msg.content}}</span> <span>{{msg.add_time | relativeTime}}</span>
+                   <div>
+                       <span>{{msg.user_name}}：{{msg.content}}</span> <span>{{msg.add_time | relativeTime}}</span>
+                   </div>
                </li>
            </ul>
            <mt-button type="danger" size="large" plain @click="loadMore(page)">加载更多</mt-button>
@@ -54,6 +56,7 @@ export default {
         // 该函数传参，表示页面点击按钮，追加数据；否则就是赋值，一般是针对第一次或者刷新第n页数据的时候
         loadMore(page) {
             this.$axios.get(`getcomments/${this.cid}?pageindex=${this.page}`).then(res => {
+                console.log(res.data.message, res.data.message.length)
                 if (res.data.message.length === 0) {
                     this.$toast('没有数据了！')
                 }
@@ -104,6 +107,13 @@ export default {
     padding: 0 10px;
     box-sizing: border-box;
     float: left;
+}
+.comment-list li div {
+    width: 100%;
+    float: left;
+}
+.comment-list span:first-child {
+    word-wrap: break-word;
 }
 .comment-list span:last-child {
     float: right;
